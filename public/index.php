@@ -58,5 +58,12 @@ $app->delete('/students/delete/{id}', function (Request $request, Response $resp
     return $response->withHeader('Content-Type', 'application/json');
 });
 
+$app->add(function ($request, $handler) {
+    $response = $handler->handle($request);
+    return $response
+            ->withHeader('Access-Control-Allow-Origin', 'http://final-api-html.test')
+            ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+            ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+});
 
 $app->run();
