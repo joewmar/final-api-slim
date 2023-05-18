@@ -6,9 +6,10 @@ use Slim\Factory\AppFactory;
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../src/config/database.php';
 
+
 $app = AppFactory::create();
 $app->addRoutingMiddleware();
-$errorMiddleware = $app->addErrorMiddleware(true, true, true);
+$errorMiddleware = $app->addErrorMiddleware(false, false, false);
 
 // Students Routes
 require __DIR__ . '/../src/routes/students.php';

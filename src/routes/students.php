@@ -4,7 +4,8 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
 
 $app = AppFactory::create();
-$errorMiddleware = $app->addErrorMiddleware(true, true, true);
+$app->addRoutingMiddleware();
+$errorMiddleware = $app->addErrorMiddleware(false, false, false);
 
 
 // GET REQUEST (ALL DATA)
