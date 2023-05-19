@@ -49,91 +49,101 @@
 
         // Insert Query
         public function insertQuery($data){
-            $value = json_decode($data, TRUE); // Convert to JSON
             $response = [];
-            $connect = $this->connect();
-            $sql = "INSERT INTO tblstudents (firstname, middlename, lastname, address, birthday, course, yearlevel) VALUES (?,?,?,?,?,?,?)";
+            if(isset($data)){
+                $value = json_decode($data, TRUE); // Convert to JSON
+                $connect = $this->connect();
+                $sql = "INSERT INTO tblstudents (firstname, middlename, lastname, address, birthday, course, yearlevel) VALUES (?,?,?,?,?,?,?)";
 
-            //Connect Database
-            $connect = $this->connect();
+                //Connect Database
+                $connect = $this->connect();
 
-            //Execute Query
-            if($stmt = mysqli_prepare($connect, $sql)){
-                mysqli_stmt_bind_param($stmt, "ssssssi", $first_name, $middle_name, $last_name, $address, $birthday, $course, $year);
-                
-                $first_name = $value['firstname'];  
-                $middle_name = $value['middlename']; 
-                $last_name = $value['lastname']; 
-                $birthday =  $value['birthday'];    
-                $address =  $value['address'];    
-                $course =  $value['course'];    
-                $year = $value['yearlevel']; 
-                mysqli_stmt_execute($stmt);
-                $response["messages"] = "Record Added: $first_name $last_name";
+                //Execute Query
+                if($stmt = mysqli_prepare($connect, $sql)){
+                    mysqli_stmt_bind_param($stmt, "ssssssi", $first_name, $middle_name, $last_name, $address, $birthday, $course, $year);
+                    
+                    $first_name = $value['firstname'];  
+                    $middle_name = $value['middlename']; 
+                    $last_name = $value['lastname']; 
+                    $birthday =  $value['birthday'];    
+                    $address =  $value['address'];    
+                    $course =  $value['course'];    
+                    $year = $value['yearlevel']; 
+                    mysqli_stmt_execute($stmt);
+                    $response["messages"] = "Record Added: $first_name $last_name";
+                }
+                else{
+                    $response["messages"] = "Error: Could not prepare query";
+                }
+
+                mysqli_stmt_close($stmt);
+                $this->closeConnection($connect);
             }
             else{
-                $response["messages"] = "Error: Could not prepare query";
+                $response["messages"] = "Error: Something Wrong of Data";
             }
-
-            mysqli_stmt_close($stmt);
-            $this->closeConnection($connect);
             return json_encode($response);
+
         }
 
         // Update Query
         public function updateQuery($data, $id){
-            $value = json_decode($data, TRUE); // Convert to JSON
             $response = [];
+            if(isset($data)){
+                $value = json_decode($data, TRUE); // Convert to JSON
 
-            if(!(empty($id))){
-                $first_name = $value['firstname'];  
-                $middle_name = $value['middlename']; 
-                $last_name = $value['lastname']; 
-                $birthday =  $value['birthday'];    
-                $address =  $value['address'];    
-                $course =  $value['course'];    
-                $year = $value['yearlevel']; 
-                $sql = "UPDATE tblstudents SET firstname = '$first_name', middlename = '$middle_name', lastname = '$last_name', address = '$address', birthday = '$birthday', course = '$course', yearlevel = $year WHERE id = $id";
+                if(!(empty($id))){
+                    $first_name = $value['firstname'];  
+                    $middle_name = $value['middlename']; 
+                    $last_name = $value['lastname']; 
+                    $birthday =  $value['birthday'];    
+                    $address =  $value['address'];    
+                    $course =  $value['course'];    
+                    $year = $value['yearlevel']; 
+                    $sql = "UPDATE tblstudents SET firstname = '$first_name', middlename = '$middle_name', lastname = '$last_name', address = '$address', birthday = '$birthday', course = '$course', yearlevel = $year WHERE id = $id";
 
+                }
+
+                //Connect Database
+                $connect = $this->connect();
+
+                //Execute Query
+                if (mysqli_query($connect, $sql)) {
+                    $response["messages"] = "Record Updated: $first_name $last_name";
+                } 
+                else {
+                    $response["messages"] = "Error: Could not work this query";
+                }
+
+                $this->closeConnection($connect);
             }
-
-            //Connect Database
-            $connect = $this->connect();
-
-            //Execute Query
-            if (mysqli_query($connect, $sql)) {
-                $response["messages"] = "Record Updated: $first_name $last_name";
-            } 
-            else {
-                $response["messages"] = "Error: Could not work this query";
+            else{
+                $response["messages"] = "Error: Something wrong the data";
             }
-
-            $this->closeConnection($connect);
             return json_encode($response);
+
         }
         // Delete Query
         public function deleteQuery($id){
             $response = [];
-
             if(!(empty($id))){
                 $sql = "DELETE FROM tblstudents WHERE id = $id";
+                
+                //Connect Database
+                $connect = $this->connect();
+
+                //Execute Query
+                if (mysqli_query($connect, $sql)) 
+                    $response["messages"] = "Record Deleted Successfully";
+                else 
+                    $response["messages"] = "Error: Could not work this query";
+                
+                $this->closeConnection($connect);
             }
             else{
-                die("");
+                die("ID Missing");
                 $response["messages"] = "ID was missing";
             }
-
-            //Connect Database
-            $connect = $this->connect();
-            //Execute Query
-            if (mysqli_query($connect, $sql)) {
-                $response["messages"] = "Record Deleted Successfully";
-            } 
-            else {
-                $response["messages"] = "Error: Could not work this query";
-            }
-
-            $this->closeConnection($connect);
             return json_encode($response);
         }
     }

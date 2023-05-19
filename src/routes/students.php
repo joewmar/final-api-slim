@@ -10,15 +10,16 @@ $errorMiddleware = $app->addErrorMiddleware(false, false, false);
 
 // GET REQUEST (ALL DATA)
 $app->get('/students', function (Request $request, Response $response, array $args) {
-    $db = new Database;
-    $data = $db->selectQuery();
-    $response->getBody()->write($data);
-    return $response->withHeader('Content-Type', 'application/json');
+        $db = new Database;
+        $data = $db->selectQuery();
+        $response->getBody()->write($data);
+        return $response->withHeader('Content-Type', 'application/json');
+    
 });
 
 // GET REQUEST (ONE DATA)
 $app->get('/students/{id}', function (Request $request, Response $response, array $args) {
-    $id = $request->getAttribute('id');   
+    $id = $args['id'];   
     $db = new Database;
     $data = $db->selectQuery($id);
     $response->getBody()->write($data);
@@ -27,28 +28,34 @@ $app->get('/students/{id}', function (Request $request, Response $response, arra
 
 // POST REQUEST (ADD DATA)
 $app->post('/students/add', function (Request $request, Response $response, array $args) {
-    $data = $request->getBody();
-    $db = new Database;
-    $result = $db->insertQuery($data);
-    $response->getBody()->write($result);
-    return $response->withHeader('Content-Type', 'application/json');
+    if($request->getMethod() == 'POST'){
+        $data = $request->getBody();
+        $db = new Database;
+        $result = $db->insertQuery($data);
+        $response->getBody()->write($result);
+        return $response->withHeader('Content-Type', 'application/json');
+    }
 });
 
 // PUT REQUEST (UPDATE DATA)
 $app->put('/students/edit/{id}', function (Request $request, Response $response, array $args) {
-    $id = $request->getAttribute('id');   
-    $data = $request->getBody();
-    $db = new Database;
-    $result = $db->updateQuery($data, $id);
-    $response->getBody()->write($result);
-    return $response->withHeader('Content-Type', 'application/json');
+    if($request->getMethod() == 'PUT'){
+        $id = $args['id'];   
+        $data = $request->getBody();
+        $db = new Database;
+        $result = $db->updateQuery($data, $id);
+        $response->getBody()->write($result);
+        return $response->withHeader('Content-Type', 'application/json');
+    }
 });
 
 // DELETE REQUEST (UPDATE DATA)
 $app->delete('/students/delete/{id}', function (Request $request, Response $response, array $args) {
-    $id = $request->getAttribute('id');   
-    $db = new Database;
-    $result = $db->deleteQuery($id);
-    $response->getBody()->write($result);
-    return $response->withHeader('Content-Type', 'application/json');
+    if($request->getMethod() == 'DELETE'){
+        $id = $args['id'];   
+        $db = new Database;
+        $result = $db->deleteQuery($id);
+        $response->getBody()->write($result);
+        return $response->withHeader('Content-Type', 'application/json');
+    }
 });

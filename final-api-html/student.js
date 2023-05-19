@@ -34,7 +34,7 @@ $(document).ready(function() {
         },
         error: function(xhr, status, error) {
             var err = eval("(" + xhr.responseText + ")");                    
-            alert(err.Message);
+            console.log(err.Message);
         }
     })
 });
@@ -53,16 +53,17 @@ function updateRecord(){
     };
     $.ajax({
         url: `http://final-api-slim.test/students/edit/${studid}`,
-        method: "PUT",
+        type: "PUT",
         contentType: "application/json",
         data: JSON.stringify(data),
         success: function(response) {
-            window.location.assign("/");
-            
+            alert(response["messages"]);
+            $(location).attr('href','/');
+
         },
         error: function(xhr, status, error) {
             var err = eval("(" + xhr.responseText + ")");                    
-            console.log(err.Message);
+            console.log('Error: ' + err.Message);
         }
     });
 }
@@ -76,12 +77,13 @@ function deleteRecord(){
             method: "DELETE", 
             contentType: "application/json; charset=utf-8",
             success: function(response) {
-                window.location.assign("/");
+                alert(response["messages"]);
+                $(location).attr('href','/');
                 
             },
             error: function(xhr, status, error) {
                 var err = eval("(" + xhr.responseText + ")");                    
-                alert(err.Message);
+                alert('Error: ' + err.Message);
             }
         })
     });
