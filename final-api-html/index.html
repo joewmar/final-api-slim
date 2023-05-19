@@ -11,6 +11,9 @@
 <body class="bg-light" data-new-gr-c-s-check-loaded="14.1108.0" data-gr-ext-installed="">
             <div class="container">
               <main>
+                <div id="apiAlert">
+
+                </div>
                 <div class="py-5 text-center">
                 <!-- <i class="fa-sharp fa-solid fa-school fa-bounce"></i>                  -->
                  <h2>Student Information</h2>
@@ -38,7 +41,6 @@
                 <div class="row g-5 border border-primary m-5 d-flex justify-content-center">
                   <div class="col-lg-7 col-lg-8">
                     <h4 class="mb-3">Add Student</h4>
-                    <form method="POST" class="needs-validation" novalidate="">
                       <div class="row g-3">
                         <div class="col-lg-4 col-sm-12">
                           <label for="firstname" class="form-label">First Name</label>
@@ -59,25 +61,16 @@
                         <div class="col-lg-4 col-sm-12">
                           <label for="lastname" class="form-label">Last Name</label>
                           <input type="text" class="form-control" id="lastname" placeholder="" value="" required>
-                          <div class="invalid-feedback">
-                            Valid Last Name is required.
-                          </div>
                         </div>
          
                         <div class="col-12">
                           <label for="address" class="form-label">Address</label>
                           <input type="text" class="form-control" id="address" required>
-                          <div class="invalid-feedback">
-                            Please enter your address.
-                          </div>
                         </div>
 
                         <div class="col-12">
                           <label for="birthday" class="form-label">Birthday</label>
                           <input type="date" class="form-control" placeholder="YYYY-MM-DD" id="birthday" required>
-                          <div class="invalid-feedback">
-                            Valid Birthday is required.
-                          </div>
                         </div>
             
                         <div class="col-lg-6 col-sm-12">
@@ -95,17 +88,11 @@
                             <option value="BEED">BEED</option>
                             <option value="PolSci">PolSci</option>
                           </select>
-                          <div class="invalid-feedback">
-                            Please select a valid course.
-                          </div>
                         </div>
             
                         <div class="col-lg-6">
                           <label for="year" class="form-label">Year Level</label>
                           <input type="number" class="form-control" name="year" id="year" min="1" value="1" max="4" >
-                          <div class="invalid-feedback">
-                            Please select a valid year level.
-                          </div>
                         </div>
             
             
@@ -115,7 +102,7 @@
                 
                       <hr class="my-4">
             
-                      <button class="w-25 btn btn-primary btn-lg my-5 float-end" type="submit" onclick="addRecord()">Add Student</button>
+                      <button class="w-25 btn btn-primary btn-lg my-5 float-end" onclick="addRecord()">Add Student</button>
                     </form>
                 </div>
                 </div>
@@ -131,8 +118,9 @@
               </footer>
             </div>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.js" integrity="sha512-6DC1eE3AWg1bgitkoaRM1lhY98PxbMIbhgYCGV107aZlyzzvaWCW1nJW2vDuYQm06hXrW0As6OGKcIaAVWnHJw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha512-wOLiP6uL5tNrV1FiutKtAyQGGJ1CWAsqQ6Kp2XZ12/CvZxw8MvNJfdhh0yTwjPIir4SWag2/MHrseR7PRmNtvA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-            <script src="js/form-validation.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
             <script src="index.js"></script>
   </body>
 </html>
