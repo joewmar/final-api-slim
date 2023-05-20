@@ -20,7 +20,7 @@ const id = params.get("id"); // is the number of id like 1 and so on
 $(document).ready(function() {
     $.ajax({
         url: `http://final-api-slim.test/students/${id}`,
-        method: "GET", 
+        type: "GET", 
         contentType: "application/json",
         success: function(response) {
             document.getElementById("studid").value = response[0].id;
@@ -57,9 +57,7 @@ function updateRecord(){
         contentType: "application/json",
         data: JSON.stringify(data),
         success: function(response) {
-            alert(response["messages"]);
-            $(location).attr('href','/');
-
+            
         },
         error: function(xhr, status, error) {
             var err = eval("(" + xhr.responseText + ")");                    
@@ -74,12 +72,10 @@ function deleteRecord(){
     $(document).ready(function() {
         $.ajax({
             url: `http://final-api-slim.test/students/delete/${id}`,
-            method: "DELETE", 
+            type: "DELETE", 
             contentType: "application/json; charset=utf-8",
             success: function(response) {
-                alert(response["messages"]);
-                $(location).attr('href','/');
-                
+
             },
             error: function(xhr, status, error) {
                 var err = eval("(" + xhr.responseText + ")");                    

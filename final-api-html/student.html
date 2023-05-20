@@ -14,7 +14,9 @@
                 <div class="row g-5 border border-primary m-5 d-flex justify-content-center">
                   <div class="col-lg-7 col-lg-8">
                     <a href="/" class="mb-3 btn btn-primary">&lt; Back</a>
+
                     <h4 class="mb-3">More Details</h4>
+                    <form action="/" method="POST" class="needs-validation" novalidate="">
                       <div class="row g-3">
                         <div class="col-12">
                           <label for="studid" class="form-label">Student ID</label>
@@ -23,22 +25,33 @@
                         <div class="col-lg-4 col-sm-12">
                           <label for="firstname" class="form-label">First Name</label>
                           <input type="text" class="form-control" id="firstname" required>
-
+                          <div class="invalid-feedback">
+                            Valid First Name is required.
+                          </div>
                         </div>
             
                         <div class="col-lg-4 col-sm-12">
                           <label for="middlename" class="form-label">Middle Name</label>
                           <input type="text" class="form-control" id="middlename" placeholder="" value="" required>
+                          <div class="invalid-feedback">
+                            Valid Middle Name is required.
+                          </div>
                         </div>
 
                         <div class="col-lg-4 col-sm-12">
                           <label for="lastname" class="form-label">Last Name</label>
                           <input type="text" class="form-control" id="lastname" placeholder="" value="" required>
+                          <div class="invalid-feedback">
+                            Valid Last Name is required.
+                          </div>
                         </div>
          
                         <div class="col-12">
                           <label for="address" class="form-label">Address</label>
                           <input type="text" class="form-control" id="address" required>
+                          <div class="invalid-feedback">
+                            Please enter your address.
+                          </div>
                         </div>
 
                         <div class="col-12">
@@ -64,24 +77,34 @@
                             <option value="BEED">BEED</option>
                             <option value="PolSci">PolSci</option>
                           </select>
+                          <div class="invalid-feedback">
+                            Please select a valid course.
+                          </div>
                         </div>
             
                         <div class="col-lg-6">
                           <label for="year" class="form-label">Year Level</label>
                           <input type="number" class="form-control" name="year" id="year" min="1" value="1" max="4" >
+                          <div class="invalid-feedback">
+                            Please select a valid year level.
+                          </div>
                         </div>
+            
+            
                       </div>
+            
                       </div>
                 
                       <hr class="my-4">
             
                       <div class="d-flex justify-content-end mb-4">
-                        <button class="w-25 btn btn-success" onclick="updateRecord()">Update</button>
-                        <button class="w-25 btn btn-danger mx-3" onclick="deleteRecord()">Delete</button>
+                        <button class="w-25 btn btn-success" type="submit" onclick="updateRecord()">Update</button>
+                        <button class="w-25 btn btn-danger mx-3" type="submit" onclick="deleteRecord()">Delete</button>
                       </div>
+                  </form>
                 </div>
               </main>
-      
+        
               <footer class="my-5 pt-5 text-muted text-center text-small">
                 <p class="mb-1">© 2017–2023 Dominican College of Tarlac</p>
                 <ul class="list-inline">
@@ -93,6 +116,7 @@
             </div>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.js" integrity="sha512-6DC1eE3AWg1bgitkoaRM1lhY98PxbMIbhgYCGV107aZlyzzvaWCW1nJW2vDuYQm06hXrW0As6OGKcIaAVWnHJw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha512-wOLiP6uL5tNrV1FiutKtAyQGGJ1CWAsqQ6Kp2XZ12/CvZxw8MvNJfdhh0yTwjPIir4SWag2/MHrseR7PRmNtvA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <script src="js/form-validation.js"></script>
             <script src="student.js"></script>
   </body>
 </html>
